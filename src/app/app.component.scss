@@ -1,0 +1,47 @@
+.text-box {
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+ 
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #010f0f;
+}
+.bordered-div {
+  border: 2px solid #000; /* 2px solid black border */
+  padding: 20px; /* Optional: Add padding to create space between content and border */
+  width: 300px;
+  background-color: #3d3e3e;
+}
+ .flex-container {
+      display: flex;
+      flex-direction: column; /* Items will be aligned in a column */
+}
+.custom-color-label {
+      color: #3e3c3b; /* Change to the desired color using a color code or name */
+}
+input[type="range"] {
+  width: 250px; /* Adjust the width as needed */
+  margin-top: 10px;
+  background: linear-gradient(to right, #4CAF50 0%, #4CAF50 calc(100% - 3px), transparent 3px, transparent 100%);
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+}
+.copy-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

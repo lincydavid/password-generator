@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>Password Generator</title>
+</head>
+
+<body>
+  <div class="flex-container">
+    <div class="row">
+      <div class="col-md-12 mb-2 text-center">
+        <p> <label class="h4 custom-color-label">Password Generator</label></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-2 input-container">
+        <input type="text" class="form-control" [value]="generatedPassword" readonly />
+        <i class="fas fa-copy copy-icon" (click)="copyToClipboard()"></i>
+      </div>
+    </div>
+    <div class="bordered-div row">
+      <div class="col-md-12">
+        <p>
+          Charcter length
+        </p>
+        <div class="slider-container">
+          <input type="range" [(ngModel)]="generatedPassword" min="0" [max]="generatedPassword.length" disabled>
+        </div>
+      </div>
+      <p>
+
+        <input type="checkbox">
+        Include upper case
+      </p>
+      <p>
+
+        <input type="checkbox">
+        Include lower case
+      </p>
+      <p>
+
+        <input type="checkbox">
+        Include number
+      </p>
+      <p>
+
+        <input type="checkbox">
+        Include symbols
+      </p>
+      <button type="button" class="btn btn-outline-primary" (click)="generatePassword()">Generate Password</button>
+    </div>
+  </div>
+</body>
+
+</html>
