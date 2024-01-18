@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Items } from './items';
 
 @Component({
   selector: 'app-root',
@@ -19,115 +20,146 @@ export class AppComponent implements OnInit {
   numbersFormControl = new FormControl(false)
   specialCharactersFormControl = new FormControl(false)
   flag: boolean | undefined;
-  lowerFlag: boolean | undefined;
-  specialFlag: boolean | undefined;
-  numberFlag: boolean | undefined;
-  upperFlag: boolean | undefined;
+  passwordLength = 12;
+
+  items: Items | undefined;
+  characterSetLength: number | undefined;
+  combinedCharacterSet: string | undefined;
 
   ngOnInit(): void {
-    this.flag = false;
-    this.lowerFlag = false;
-    this.specialFlag = false;
-    this.numberFlag = false;
-    this.upperFlag = false;
+
+    this.setDefaultItemValue();
+    this.generatePassword();
 
     this.lowercaseFormControl.valueChanges.subscribe(
       (newValue) => {
-        if (!newValue) {
-          this.flag = true;//call generated button again and update charcterset
-          this.lowerFlag = true;//generated password will not have lowercase characters
+        if (newValue) {
+          if (this.items) {
+            this.items.lowerCharcters = 'abcdefghijklmnopqrstuvwxyz';
+          }
+        } else {
+          if (this.items) {
+            this.items.lowerCharcters = '';
+            this.calculateLength();
+            if (this.characterSetLength === 0) {
+              this.lowercaseFormControl.setValue(true);
+              return;
+            }
+          }
         }
       }
     );
     this.specialCharactersFormControl.valueChanges.subscribe(
       (newValue) => {
-        if (!newValue) {
-          this.flag = true;//call generated button again and update charcterset
-          this.specialFlag = true;//generated password will not have lowercase characters
+        if (newValue) {
+          if (this.items) {
+            this.items.specialCharcters = '!@#$%^&*()-_+=<>?';
+          }
+        } else {
+          if (this.items) {
+            this.items.specialCharcters = '';
+            this.calculateLength();
+            if (this.characterSetLength === 0) {
+              this.specialCharactersFormControl.setValue(true);
+              return;
+            }
+          }
         }
       }
     );
     this.numbersFormControl.valueChanges.subscribe(
       (newValue) => {
-        if (!newValue) {
-          this.flag = true;//call generated button again and update charcterset
-          this.numberFlag = true;//generated password will not have lowercase characters
-        } else{
-          this.flag = false;
-          this.upperFlag = false;
+        if (newValue) {
+          if (this.items) {
+            this.items.numberCharcters = '0123456789';
+          }
+        } else {
+          if (this.items) {
+            this.items.numberCharcters = '';
+            this.calculateLength();
+            if (this.characterSetLength === 0) {
+              this.numbersFormControl.setValue(true);
+              return;
+            }
+          }
         }
       }
     );
     this.uppercaseFormControl.valueChanges.subscribe(
       (newValue) => {
-        if (!newValue) {
-          this.flag = true;//call generated button again and update charcterset
-          this.upperFlag = true;//generated password will not have lowercase characters
-        } else{
-          this.flag = false;
-          this.upperFlag = false;
+        if (newValue) {
+          if (this.items) {
+            this.items.upperCharcters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          }
+        } else {
+          if (this.items) {
+            this.items.upperCharcters = '';
+            this.calculateLength();
+            if (this.characterSetLength === 0) {
+              this.uppercaseFormControl.setValue(true);
+              return;
+            }
+          }
         }
       }
     );
   }
-  generatePassword() {
-    let combinedCharacterSet = '';
-    let password = '';
-    const length = 20;
-    if (this.flag) {
-      if (this.lowerFlag) {
-        console.log('1')
-        combinedCharacterSet = this.uppercaseLetters + this.numbers + this.specialCharacters;
-      }
-      if (this.specialFlag) {
-        console.log('2')
-        combinedCharacterSet = this.lowercaseLetters + this.uppercaseLetters + this.numbers;
-      }
-      if (this.numberFlag) {
-        console.log('3')
-        combinedCharacterSet = this.lowercaseLetters + this.uppercaseLetters + this.specialCharacters;
-      }
-      if (this.upperFlag) {
-        console.log('4')
-        combinedCharacterSet = this.lowercaseLetters + this.specialCharacters + this.numbers;
-      }
-    } else {
-      combinedCharacterSet = this.lowercaseLetters + this.uppercaseLetters + this.numbers + this.specialCharacters;
-      this.numbersFormControl.setValue(true);
-      this.specialCharactersFormControl.setValue(true);
+  setDefaultItemValue() {
+    this.items = {
+      specialCharcters: '!@#$%^&*()-_+=<>?',
+      numberCharcters: '0123456789',
+      upperCharcters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      lowerCharcters: 'abcdefghijklmnopqrstuvwxyz'
+    };
+    if (this.items?.upperCharcters) {
       this.uppercaseFormControl.setValue(true);
+    } if (this.items?.lowerCharcters) {
       this.lowercaseFormControl.setValue(true);
     }
-    const characterSetLength = combinedCharacterSet.length;
+    if (this.items?.specialCharcters) {
+      this.specialCharactersFormControl.setValue(true);
+    }
+    if (this.items?.numberCharcters) {
+      this.numbersFormControl.setValue(true);
+    }
 
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characterSetLength);
-      password += combinedCharacterSet[randomIndex];
+
+  }
+  calculateLength() {
+    if (this.items) {
+      this.combinedCharacterSet =
+        this.items?.lowerCharcters + this.items?.upperCharcters + this.items?.numberCharcters + this.items?.specialCharcters;
+      this.characterSetLength = this.combinedCharacterSet?.length
+    }
+  }
+
+  generatePassword() {
+    this.combinedCharacterSet = '';
+    let password = '';
+    if (this.items) {
+      this.combinedCharacterSet =
+        this.items?.lowerCharcters + this.items?.upperCharcters + this.items?.numberCharcters + this.items?.specialCharcters;
+    }
+    this.characterSetLength = this.combinedCharacterSet.length;
+
+    console.log(this.items, this.characterSetLength)
+    for (let i = 0; i < this.passwordLength; i++) {
+      const randomIndex = Math.floor(Math.random() * this.characterSetLength);
+      password += this.combinedCharacterSet[randomIndex];
     }
     this.generatedPassword = password;
-    console.log('pass ',this.generatedPassword)
-
   }
 
-  selectCheckbox() {
-    for (let i = 0; i < this.generatedPassword.length; i++) {
-      if (this.specialCharacters.includes(this.generatedPassword[i])) {
-        this.specialCharactersFormControl.setValue(true);
-      }
-      if (this.numbers.includes(this.generatedPassword[i])) {
-        this.numbersFormControl.setValue(true);
-      }
-      if (this.uppercaseLetters.includes(this.generatedPassword[i])) {
-        this.uppercaseFormControl.setValue(true);
-      }
-      if (this.lowercaseLetters.includes(this.generatedPassword[i])) {
-        this.lowercaseFormControl.setValue(true);
-      }
-    }
-  }
   copyToClipboard() {
     // const inputElement = document.getElementById('textInput') as HTMLInputElement;
     // inputElement.select();
     // document.execCommand('copy');
+  }
+
+  inputValueChange(event: any) {
+    if (event.target.value) {
+      const newlength = event.target.value.length;
+      this.passwordLength = newlength;
+    }
   }
 }
