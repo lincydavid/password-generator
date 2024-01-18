@@ -28,22 +28,22 @@
       </div>
       <p>
 
-        <input type="checkbox">
+        <input type="checkbox" [formControl]="uppercaseFormControl">
         Include upper case
       </p>
       <p>
 
-        <input type="checkbox">
+        <input type="checkbox" [formControl]="lowercaseFormControl">
         Include lower case
       </p>
       <p>
 
-        <input type="checkbox">
+        <input type="checkbox" [formControl]="numbersFormControl">
         Include number
       </p>
       <p>
 
-        <input type="checkbox">
+        <input type="checkbox" [formControl]="specialCharactersFormControl">
         Include symbols
       </p>
       <button type="button" class="btn btn-outline-primary" (click)="generatePassword()">Generate Password</button>

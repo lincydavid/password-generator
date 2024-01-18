@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Working of Password Generator
+Password Generator
+
+On page load a deafult password with all charcters with a length of 12 is generated
+We can edit the input textbox whose input length will increase when we input new items
+All checkboxes will be enabled on first click
+When we uncheck each checkbox corresponsing charcters get removed and new combination will be genrated with available charcteers in same length
+and when we click genrate it will generate another combination with same length from textbox
+atleast one checkbox  will be always enabled
