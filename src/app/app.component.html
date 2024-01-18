@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 mb-2 input-container">
-        <input type="text" class="form-control" [value]="generatedPassword" (change)="inputValueChange($event)"/>
+        <input type="text" class="form-control" [value]="generatedPassword" (change)="inputValueChange($event)" />
         <i class="fas fa-copy copy-icon" (click)="copyToClipboard()"></i>
       </div>
     </div>
@@ -42,11 +42,16 @@
         Include number
       </p>
       <p>
-
         <input type="checkbox" [formControl]="specialCharactersFormControl">
         Include symbols
       </p>
-      <button type="button" class="btn btn-outline-primary" (click)="generatePassword()">Generate Password</button>
+      <div class="bordered-div">
+        <div id="password-strength-bar">
+          <div id="password-strength-indicator"></div>
+        </div>
+        <div id="password-strength-text">Strength: <span id="strength-text">Weak</span></div>
+      </div>
+      <button type="button" class="btn btn-outline-primary mt-2" (click)="generatePassword()">Generate Password</button>
     </div>
   </div>
 </body>

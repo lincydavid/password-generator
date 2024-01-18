@@ -148,6 +148,7 @@ export class AppComponent implements OnInit {
       password += this.combinedCharacterSet[randomIndex];
     }
     this.generatedPassword = password;
+    this.updatePasswordStrength(this.generatedPassword);
   }
 
   copyToClipboard() {
@@ -160,6 +161,46 @@ export class AppComponent implements OnInit {
     if (event.target.value) {
       const newlength = event.target.value.length;
       this.passwordLength = newlength;
+    }
+  }
+  updatePasswordStrength(password: string) {
+    const lengthScore = Math.min(password.length / 8, 1);
+    const uppercaseScore = password.match(/[A-Z]/) ? 1 : 0;
+    const lowercaseScore = password.match(/[a-z]/) ? 1 : 0;
+    const numberScore = password.match(/[0-9]/) ? 1 : 0;
+    const specialCharScore = password.match(/[^A-Za-z0-9]/) ? 1 : 0;
+
+    const totalScore = lengthScore + uppercaseScore + lowercaseScore + numberScore + specialCharScore;
+
+    let indicator = document.getElementById('password-strength-indicator');
+    if (indicator)
+    {
+      
+      indicator.style.width = (totalScore * 20) + '%'; // Each criterion contributes 20% to the total width
+      indicator.style.backgroundColor = 'green'
+      console.log('here ', indicator.style.color)
+    }
+     
+    const strengthText = document.getElementById('strength-text');
+    if (totalScore < 3) {
+      if (strengthText && indicator) {
+        strengthText.textContent = 'Weak';
+        strengthText.style.color = 'red';
+        indicator.style.backgroundColor = 'red'
+      }
+
+    } else if (totalScore < 4 && indicator) {
+      if (strengthText) {
+        strengthText.textContent = 'Medium';
+        strengthText.style.color = 'orange';
+        indicator.style.backgroundColor = 'orange'
+      }
+    } else {
+      if (strengthText && indicator) {
+        strengthText.textContent = 'Strong';
+        strengthText.style.color = 'green';
+        indicator.style.backgroundColor = 'green'
+      }
     }
   }
 }
