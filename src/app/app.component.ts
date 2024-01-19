@@ -25,9 +25,10 @@ export class AppComponent implements OnInit {
   items: Items | undefined;
   characterSetLength: number | undefined;
   combinedCharacterSet: string | undefined;
+  isChecked: boolean | undefined;
 
   ngOnInit(): void {
-
+this.isChecked = false
     this.setDefaultItemValue();
     this.generatePassword();
 
@@ -104,6 +105,7 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
   setDefaultItemValue() {
     this.items = {
       specialCharcters: '!@#$%^&*()-_+=<>?',
@@ -142,7 +144,6 @@ export class AppComponent implements OnInit {
     }
     this.characterSetLength = this.combinedCharacterSet.length;
 
-    console.log(this.items, this.characterSetLength)
     for (let i = 0; i < this.passwordLength; i++) {
       const randomIndex = Math.floor(Math.random() * this.characterSetLength);
       password += this.combinedCharacterSet[randomIndex];
@@ -151,10 +152,18 @@ export class AppComponent implements OnInit {
     this.updatePasswordStrength(this.generatedPassword);
   }
 
-  copyToClipboard() {
-    // const inputElement = document.getElementById('textInput') as HTMLInputElement;
-    // inputElement.select();
-    // document.execCommand('copy');
+  copyToClipboard(inputElement: HTMLInputElement) {
+    inputElement.select();
+    try {
+      navigator.clipboard.writeText(inputElement.value)
+        .then(() => {
+        })
+        .catch((err) => {
+          console.error('Unable to copy text to clipboard', err);
+        });
+    } catch (err) {
+      console.error('Clipboard API not supported', err);
+    }
   }
 
   inputValueChange(event: any) {
@@ -163,6 +172,7 @@ export class AppComponent implements OnInit {
       this.passwordLength = newlength;
     }
   }
+
   updatePasswordStrength(password: string) {
     const lengthScore = Math.min(password.length / 8, 1);
     const uppercaseScore = password.match(/[A-Z]/) ? 1 : 0;
@@ -173,16 +183,13 @@ export class AppComponent implements OnInit {
     const totalScore = lengthScore + uppercaseScore + lowercaseScore + numberScore + specialCharScore;
 
     let indicator = document.getElementById('password-strength-indicator');
-    if (indicator)
-    {
-      
+    if (indicator) {
       indicator.style.width = (totalScore * 20) + '%'; // Each criterion contributes 20% to the total width
       indicator.style.backgroundColor = 'green'
-      console.log('here ', indicator.style.color)
     }
-     
+
     const strengthText = document.getElementById('strength-text');
-    if (totalScore < 3) {
+    if (totalScore < 2) {
       if (strengthText && indicator) {
         strengthText.textContent = 'Weak';
         strengthText.style.color = 'red';

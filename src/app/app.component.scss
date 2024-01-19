@@ -13,13 +13,13 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #010f0f;
+  background-color: #030707;
 }
 .bordered-div {
   border: 2px solid #000;
   padding: 20px;
-  width: 300px;
-  background-color: #3d3e3e;
+  width: 400px;
+  background-color: #0e10109e;
 }
  .flex-container {
       display: flex;
@@ -32,6 +32,7 @@ input[type="range"] {
   width: 250px; 
   margin-top: 10px;
   background: linear-gradient(to right, #4CAF50 0%, #4CAF50 calc(100% - 3px), transparent 3px, transparent 100%);
+  
 }
 
 .input-container {
@@ -64,4 +65,7 @@ input[type="range"] {
 
 #password-strength-text {
   text-align: center;
+}
+input[type="checkbox"]:checked {
+  background-color: green;  /* Change this to your desired color */
 }

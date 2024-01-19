@@ -13,8 +13,8 @@
     </div>
     <div class="row">
       <div class="col-md-12 mb-2 input-container">
-        <input type="text" class="form-control" [value]="generatedPassword" (change)="inputValueChange($event)" />
-        <i class="fas fa-copy copy-icon" (click)="copyToClipboard()"></i>
+        <input type="text" class="form-control" [value]="generatedPassword"  #inputField (change)="inputValueChange($event)" />
+        <i class="fas fa-copy copy-icon" (click)="copyToClipboard(inputField)"></i>
       </div>
     </div>
     <div class="bordered-div row">
@@ -23,7 +23,7 @@
           Charcter length {{passwordLength}}
         </p>
         <div class="slider-container">
-          <input type="range" [(ngModel)]="generatedPassword" min="0" [max]="generatedPassword.length" disabled>
+          <input type="range" [(ngModel)]="generatedPassword" min="0" [max]="generatedPassword.length" readonly>
         </div>
       </div>
       <p>
@@ -54,6 +54,7 @@
       <button type="button" class="btn btn-outline-primary mt-2" (click)="generatePassword()">Generate Password</button>
     </div>
   </div>
+
 </body>
 
 </html>
