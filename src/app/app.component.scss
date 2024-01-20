@@ -7,19 +7,20 @@
   box-sizing: border-box;
  
 }
-body {
+.flex-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   background-color: #030707;
+  color: #fff;
 }
 .bordered-div {
-  border: 2px solid #000;
+  border: 2px solid #1e1d1d;
   padding: 20px;
   width: 400px;
-  background-color: #0e10109e;
+  background-color: #0108089e;
 }
  .flex-container {
       display: flex;
@@ -45,6 +46,7 @@ input[type="range"] {
   right: 14px;
   transform: translateY(-50%);
   cursor: pointer;
+  color: #000
 }
 #password-strength-bar {
   width: 100%;

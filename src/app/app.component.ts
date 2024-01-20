@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   isChecked: boolean | undefined;
 
   ngOnInit(): void {
-this.isChecked = false
+    this.isChecked = false
     this.setDefaultItemValue();
     this.generatePassword();
 
@@ -209,5 +209,8 @@ this.isChecked = false
         indicator.style.backgroundColor = 'green'
       }
     }
+  }
+  onRangeChange(event: any) {
+    console.log(event.target.value);
   }
 }

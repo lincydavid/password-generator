@@ -1,60 +1,57 @@
-<html>
-
-<head>
-  <title>Password Generator</title>
-</head>
-
-<body>
-  <div class="flex-container">
-    <div class="row">
-      <div class="col-md-12 mb-2 text-center">
-        <p> <label class="h4 custom-color-label">Password Generator</label></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 mb-2 input-container">
-        <input type="text" class="form-control" [value]="generatedPassword"  #inputField (change)="inputValueChange($event)" />
-        <i class="fas fa-copy copy-icon" (click)="copyToClipboard(inputField)"></i>
-      </div>
-    </div>
-    <div class="bordered-div row">
-      <div class="col-md-12">
-        <p>
-          Charcter length {{passwordLength}}
-        </p>
-        <div class="slider-container">
-          <input type="range" [(ngModel)]="generatedPassword" min="0" [max]="generatedPassword.length" readonly>
-        </div>
-      </div>
-      <p>
-
-        <input type="checkbox" [formControl]="uppercaseFormControl">
-        Include upper case
-      </p>
-      <p>
-
-        <input type="checkbox" [formControl]="lowercaseFormControl">
-        Include lower case
-      </p>
-      <p>
-
-        <input type="checkbox" [formControl]="numbersFormControl">
-        Include number
-      </p>
-      <p>
-        <input type="checkbox" [formControl]="specialCharactersFormControl">
-        Include symbols
-      </p>
-      <div class="bordered-div">
-        <div id="password-strength-bar">
-          <div id="password-strength-indicator"></div>
-        </div>
-        <div id="password-strength-text">Strength: <span id="strength-text">Weak</span></div>
-      </div>
-      <button type="button" class="btn btn-outline-primary mt-2" (click)="generatePassword()">Generate Password</button>
+<!-- <div class="flex-container">
+  <div class="row">
+    <div class="col-md-12 mb-2 text-center">
+      <p> <label class="h4 custom-color-label">Password Generator</label></p>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12 mb-2 input-container">
+      <input type="text" class="form-control" [value]="generatedPassword" #inputField
+        (change)="inputValueChange($event)" />
+      <i class="fas fa-copy copy-icon" (click)="copyToClipboard(inputField)"></i>
+    </div>
+  </div>
+  <div class="bordered-div row">
+    <div class="col-md-12">
+      <p>
+        Charcter length {{passwordLength}}
+      </p>
+      <div class="slider-container">
+        <input type="range" [(ngModel)]="generatedPassword" min="0" [max]="generatedPassword.length" disabled>
+      </div>
+    </div>
+    <p>
+      <label>
+        <input type="checkbox" [formControl]="uppercaseFormControl">
+        Include upper case
+      </label>
 
-</body>
-
-</html>
+    </p>
+    <p>
+      <label>
+        <input type="checkbox" [formControl]="lowercaseFormControl">
+        Include lower case
+      </label>
+    </p>
+    <p>
+      <label>
+        <input type="checkbox" [formControl]="numbersFormControl">
+        Include number
+      </label>
+    </p>
+    <p>
+      <label>
+        <input type="checkbox" [formControl]="specialCharactersFormControl">
+        Include symbols
+      </label>
+    </p>
+    <div class="bordered-div">
+      <div id="password-strength-bar">
+        <div id="password-strength-indicator"></div>
+      </div>
+      <div id="password-strength-text">Strength: <span id="strength-text">Weak</span></div>
+    </div>
+    <button type="button" class="btn btn-outline-primary mt-2" (click)="generatePassword()">Generate Password</button>
+  </div>
+</div> -->
+<router-outlet></router-outlet>
