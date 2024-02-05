@@ -4,7 +4,7 @@
       <p> <label class="h4 custom-color-label">Password Generator</label></p>
     </div>
   </div>
-  <div class="row">
+  <div class="inputbox row">
     <div class="col-md-12 mb-2 input-container">
       <input type="text" class="form-control" [value]="generatedPassword" #inputField
         (change)="inputValueChange($event)" />
@@ -17,7 +17,7 @@
         Charcter length {{passwordLength}}
       </p>
       <div class="slider-container">
-        <input type="range" [(ngModel)]="passwordLength" min="0" [max]="12" (change)="onRangeChange($event)">
+        <input type="range" [(ngModel)]="passwordLength" min="0" [max]="20" (change)="onRangeChange($event)">
       </div>
     </div>
     <p>

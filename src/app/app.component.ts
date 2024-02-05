@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Items } from './items';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +21,16 @@ export class AppComponent implements OnInit {
   numbersFormControl = new FormControl(false)
   specialCharactersFormControl = new FormControl(false)
   flag: boolean | undefined;
-  passwordLength = 12;
+  passwordLength = 20;
 
   items: Items | undefined;
   characterSetLength: number | undefined;
   combinedCharacterSet: string | undefined;
   isChecked: boolean | undefined;
+
+  constructor(private toastr: ToastrService) {
+
+  }
 
   ngOnInit(): void {
     this.isChecked = false
@@ -157,6 +162,7 @@ export class AppComponent implements OnInit {
     try {
       navigator.clipboard.writeText(inputElement.value)
         .then(() => {
+         alert('Copied to Clipboard')
         })
         .catch((err) => {
           console.error('Unable to copy text to clipboard', err);
