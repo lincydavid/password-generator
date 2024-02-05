@@ -211,6 +211,6 @@ export class AppComponent implements OnInit {
     }
   }
   onRangeChange(event: any) {
-    console.log(event.target.value);
+    this.passwordLength = event.target.value;
   }
 }
