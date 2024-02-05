@@ -17,23 +17,25 @@
   color: #fff;
 }
 .inputbox{
-  width: 400px;
+  width: 420px;
 }
 .bordered-div {
   border: 2px solid #1e1d1d;
   padding: 20px;
   width: 400px;
-  background-color: #0108089e;
+  
+  background-color: #24232b;
 }
 .flex-container {
       display: flex;
       flex-direction: column; 
+      background-color: #0e0d13;
 }
 .custom-color-label {
       color: #3e3c3b; 
 }
 input[type="range"] {
-  width: 250px; 
+  width: 330px; 
   margin-top: 10px;
   background: linear-gradient(to right, #4CAF50 0%, #4CAF50 calc(100% - 3px), transparent 3px, transparent 100%);
   
@@ -50,6 +52,9 @@ input[type="range"] {
   transform: translateY(-50%);
   cursor: pointer;
   color: #000
+}
+.slider-container{
+  width: 100%;;
 }
 #password-strength-bar {
   width: 100%;

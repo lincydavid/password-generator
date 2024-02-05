@@ -11,13 +11,14 @@
       <i class="fa fa-copy copy-icon" (click)="copyToClipboard(inputField)"></i>
     </div>
   </div>
-  <div class="bordered-div row">
+  <div class="bordered-div row mt-2">
     <div class="col-md-12">
-      <p>
-        Charcter length {{passwordLength}}
-      </p>
-      <div class="slider-container">
-        <input type="range" [(ngModel)]="passwordLength" min="0" [max]="20" (change)="onRangeChange($event)">
+      <div class="row">
+        <div class="col-md-6"> Charcter Length</div>
+        <div class="col-md-6 d-flex justify-content-end">{{passwordLength}}</div>
+      </div>
+      <div class="col-md-12">
+        <input class="slider-container" type="range" [(ngModel)]="passwordLength" min="0" [max]="20" (change)="onRangeChange($event)">
       </div>
     </div>
     <p>
